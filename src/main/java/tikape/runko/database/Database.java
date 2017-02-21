@@ -39,10 +39,13 @@ public class Database {
         ArrayList<String> lista = new ArrayList<>();
 
         // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
-        lista.add("CREATE TABLE Opiskelija (id integer PRIMARY KEY, nimi varchar(255));");
-        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Platon');");
-        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Aristoteles');");
-        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Homeros');");
+        lista.add("PRAGMA foreign_keys = ON;");
+        lista.add("DROP TABLE Aihealue;");
+        lista.add("CREATE TABLE Aihealue (id integer PRIMARY KEY, nimi varchar(20));");
+        lista.add("INSERT INTO Aihealue (nimi) VALUES ('Urheilu');");
+        lista.add("INSERT INTO Aihealue (nimi) VALUES ('Musiikki');");
+        lista.add("INSERT INTO Aihealue (nimi) VALUES ('Ruuanlaitto');");
+        lista.add("INSERT INTO Aihealue (nimi) VALUES ('Autot');");
 
         return lista;
     }
