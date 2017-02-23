@@ -7,12 +7,21 @@
     </head>
 
     <body>
-        <h1>Foorumilla käyty keskustelua seuraavist aiheista:</h1>
+        <h1>Foorumilla käyty keskustelua seuraavista aiheista:</h1>
 
         <ol>
             <li th:each="aihealue: ${aihealueet}">
                 <span th:text="${aihealue.nimi}">aihealueen nimi</span> <a th:href="${'/aihealueet/' + aihealue.id}">linkki</a>
             </li>
         </ol>
+        
+        <button onclick="goBack()">Takaisin</button>
+
+        <script>
+        function goBack() {
+            window.history.back();
+        }
+        </script>
+        
     </body>
 </html>

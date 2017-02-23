@@ -7,8 +7,16 @@
     </head>
 
     <body>
-        <h1>Hei <span th:text="${aihealue.nimi}">aihealue</span>!</h1>
+        <h1>Aihealue: <span th:text="${aihealue.nimi}">aihealue</span></h1>
 
-        <p>Tässä näkyy aihelueen <span th:text="${aihealue.nimi}">aihealue</span> viesteihin.</p>
+        <p>Tässä näkyy aihelueen <span th:text="${aihealue.nimi}">aihealue</span> viestit.</p>
+        
+        <button onclick="goBack()">Takaisin</button>
+
+        <script>
+        function goBack() {
+            window.history.back();
+        }
+        </script>
     </body>
 </html>
