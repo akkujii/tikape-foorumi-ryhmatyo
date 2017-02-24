@@ -2,20 +2,20 @@ package tikape.runko.domain;
 
 public class Aihealue {
 
-    private Integer id;
+    private Integer aihe_id;
     private String nimi;
 
     public Aihealue(Integer id, String nimi) {
-        this.id = id;
+        this.aihe_id = id;
         this.nimi = nimi;
     }
 
     public Integer getId() {
-        return id;
+        return aihe_id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.aihe_id = id;
     }
 
     public String getNimi() {

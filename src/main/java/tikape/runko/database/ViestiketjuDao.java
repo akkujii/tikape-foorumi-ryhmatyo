@@ -11,20 +11,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tikape.runko.domain.Aihealue;
+import tikape.runko.domain.Viestiketju;
 
-public class AihealueDao implements Dao<Aihealue, Integer> {
+public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
     private Database database;
 
-    public AihealueDao(Database database) {
+    public ViestiketjuDao(Database database) {
         this.database = database;
     }
 
     @Override
-    public Aihealue findOne(Integer key) throws SQLException {
+    public Viestiketju findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihealue WHERE aihe_id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE ketju_id = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -33,10 +33,11 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
             return null;
         }
 
+        Integer ketju_id = rs.getInt("ketju_id");
         Integer aihe_id = rs.getInt("aihe_id");
-        String nimi = rs.getString("nimi");
+        String otsikko = rs.getString("otsikko");
 
-        Aihealue o = new Aihealue(aihe_id, nimi);
+        Viestiketju o = new Viestiketju(ketju_id, aihe_id, otsikko);
 
         rs.close();
         stmt.close();
@@ -46,18 +47,19 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
     }
 
     @Override
-    public List<Aihealue> findAll() throws SQLException {
+    public List<Viestiketju> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihealue");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju");
 
         ResultSet rs = stmt.executeQuery();
-        List<Aihealue> aihealueet = new ArrayList<>();
+        List<Viestiketju> aihealueet = new ArrayList<>();
         while (rs.next()) {
+            Integer ketju_id = rs.getInt("ketju_id");
             Integer aihe_id = rs.getInt("aihe_id");
-            String nimi = rs.getString("nimi");
+            String otsikko = rs.getString("otsikko");
 
-            aihealueet.add(new Aihealue(aihe_id, nimi));
+            aihealueet.add(new Viestiketju(ketju_id, aihe_id, otsikko));
         }
 
         rs.close();

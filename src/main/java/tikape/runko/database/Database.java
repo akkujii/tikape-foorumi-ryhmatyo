@@ -48,7 +48,7 @@ public class Database {
         lista.add("INSERT INTO Aihealue (nimi) VALUES ('Autot');");*/
         
         lista.add("PRAGMA foreign_keys = ON; DROP TABLE Aihealue; "
-                + "CREATE TABLE Aihealue (id integer PRIMARY KEY, nimi varchar(20));"
+                + "CREATE TABLE Aihealue (aihe_id integer PRIMARY KEY, nimi varchar(20));"
                 + "INSERT INTO Aihealue (nimi) VALUES ('Urheilu');"
                 + "INSERT INTO Aihealue (nimi) VALUES ('Musiikki');"
                 + "INSERT INTO Aihealue (nimi) VALUES ('Ruuanlaitto');"
