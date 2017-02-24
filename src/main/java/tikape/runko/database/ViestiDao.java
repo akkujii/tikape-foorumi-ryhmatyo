@@ -6,25 +6,26 @@
 package tikape.runko.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tikape.runko.domain.Viestiketju;
+import tikape.runko.domain.Viesti;
 
-public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
+public class ViestiDao implements Dao<Viesti, Integer> {
 
     private Database database;
 
-    public ViestiketjuDao(Database database) {
+    public ViestiDao(Database database) {
         this.database = database;
     }
 
     @Override
-    public Viestiketju findOne(Integer key) throws SQLException {
+    public Viesti findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE ketju_id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE viesti_id = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -33,11 +34,15 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
             return null;
         }
 
+        
+        Integer viesti_id = rs.getInt("viesti_id");
         Integer ketju_id = rs.getInt("ketju_id");
-        Integer aihe_id = rs.getInt("aihe_id");
-        String otsikko = rs.getString("otsikko");
+        String lahettaja = rs.getString("lahettaja");
+        Date lahetetty = rs.getDate("lahetetty");
+        String sisalto = rs.getString("sisalto");
+        
 
-        Viestiketju o = new Viestiketju(ketju_id, aihe_id, otsikko);
+        Viesti o = new Viesti(viesti_id, ketju_id, lahettaja, lahetetty, sisalto);
 
         rs.close();
         stmt.close();
@@ -47,26 +52,28 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
     }
 
     @Override
-    public List<Viestiketju> findAll() throws SQLException {
+    public List<Viesti> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti");
 
         ResultSet rs = stmt.executeQuery();
-        List<Viestiketju> viestiketjut = new ArrayList<>();
+        List<Viesti> viestit = new ArrayList<>();
         while (rs.next()) {
+            Integer viesti_id = rs.getInt("viesti_id");
             Integer ketju_id = rs.getInt("ketju_id");
-            Integer aihe_id = rs.getInt("aihe_id");
-            String otsikko = rs.getString("otsikko");
+            String lahettaja = rs.getString("lahettaja");
+            Date lahetetty = rs.getDate("lahetetty");
+            String sisalto = rs.getString("sisalto");
 
-            viestiketjut.add(new Viestiketju(ketju_id, aihe_id, otsikko));
+            viestit.add(new Viesti(viesti_id, ketju_id, lahettaja, lahetetty, sisalto));
         }
 
         rs.close();
         stmt.close();
         connection.close();
 
-        return viestiketjut;
+        return viestit;
     }
 
     @Override
