@@ -7,13 +7,11 @@
     </head>
 
     <body>
-        <h1>Viestiketju: <span th:text="${viestiketju.otsikko}">viestiketju</span></h1>
-        
-        <p>Tässä näkyy viestiketjun <span th:text="${viestiketju.otsikko}">viestiketju</span> viestiketjut.</p>
-        
+        <h1>Foorumilla käyty keskustelua seuraavista aiheista:</h1>
+
         <ol>
-            <li th:each="viesitketju: ${viestiketjut}">
-                <span th:text="${viestiketju.otsikko}">viestiketjun nimi</span> <a th:href="${'/aihealueet/:id/viestiketjut/' + viestiketju.id}">linkki</a>
+            <li th:each="viestiketju: ${viestiketjut}">
+                <span th:text="${viestiketju.otsikko}">viestiketjun otsikko</span> <a th:href="${'/aihealueet/:id/viestiketjut/' + aihealue.id}">linkki</a>
             </li>
         </ol>
         
@@ -24,5 +22,6 @@
             window.history.back();
         }
         </script>
+        
     </body>
 </html>
