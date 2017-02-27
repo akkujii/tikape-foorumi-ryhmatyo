@@ -6,6 +6,8 @@ import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.AihealueDao;
+import tikape.runko.database.ViestiketjuDao;
+import tikape.runko.database.ViestiDao;
 
 public class Main {
 
@@ -20,6 +22,8 @@ public class Main {
         database.init();
 
         AihealueDao aihealueDao = new AihealueDao(database);
+        ViestiketjuDao viestiketjuDao = new ViestiketjuDao(database);
+        ViestiDao viestiDao = new ViestiDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -38,6 +42,20 @@ public class Main {
         get("/aihealueet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("aihealue", aihealueDao.findOne(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "aihealue");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/aihealueet/:id/viestiketjut", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("viestiketjut", viestiketjuDao.findAll());
+            
+            return new ModelAndView(map, "viestiketjut");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/aihealueet/:id/viestiketjut/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "aihealue");
         }, new ThymeleafTemplateEngine());
