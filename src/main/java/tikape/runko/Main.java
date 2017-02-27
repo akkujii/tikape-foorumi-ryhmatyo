@@ -48,16 +48,16 @@ public class Main {
         
         get("/aihealueet/:id/viestiketjut", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viestiketjut", viestiketjuDao.findAll());
+            map.put("viestiketju", viestiketjuDao.findAll());
             
-            return new ModelAndView(map, "viestiketjut");
+            return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
         
         get("/aihealueet/:id/viestiketjut/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("id"))));
 
-            return new ModelAndView(map, "aihealue");
+            return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
     }
 }

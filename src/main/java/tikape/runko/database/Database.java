@@ -60,7 +60,7 @@ public class Database {
                 + "INSERT INTO Viestiketju (aihe_id, otsikko) VALUES (3, 'Nakkiperunat on parasta');"
                 + "INSERT INTO Viestiketju (aihe_id, otsikko) VALUES (4, 'Vrum vrum');");
         lista.add("DROP TABLE Viesti;"
-                + "CREATE TABLE Viesti (viesti_id integer PRIMARY KEY, lahettaja varchar(20), lahetetty timestamp NOT NULL DEFAULT(datetime('now', '+2 hour'), viestiketju_id integer, sisalto varchar(32768), FOREIGN KEY(viestiketju_id) REFERENCES Viestiketju(ketju_id), FOREIGN KEY(vastausviestiin) REFERENCES Viesti(viesti_id));"
+                + "CREATE TABLE Viesti (viesti_id integer PRIMARY KEY, lahettaja varchar(20), lahetetty timestamp NOT NULL DEFAULT(datetime('now', '+2 hour')), viestiketju_id integer, sisalto varchar(32768), FOREIGN KEY(viestiketju_id) REFERENCES Viestiketju(ketju_id));"
                 + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES (Matti, 1, 'Niin on');"
                 + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES (Pekka, 1, 'Eipäs ole');"
                 + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES (Pertti, 2, 'JOOO');");
