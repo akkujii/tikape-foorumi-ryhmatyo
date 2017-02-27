@@ -68,6 +68,27 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
         return viestiketjut;
     }
+    
+    public List<Viestiketju> findByAihealue(int id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE aihe_id = " + id);
+
+        ResultSet rs = stmt.executeQuery();
+        List<Viestiketju> viestiketjut = new ArrayList<>();
+        while (rs.next()) {
+            Integer ketju_id = rs.getInt("ketju_id");
+            Integer aihe_id = rs.getInt("aihe_id");
+            String otsikko = rs.getString("otsikko");
+
+            viestiketjut.add(new Viestiketju(ketju_id, aihe_id, otsikko));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return viestiketjut;
+    }
 
     @Override
     public void delete(Integer key) throws SQLException {
