@@ -18,7 +18,9 @@
                 
             </li>-->
             <li th:each="viesti: ${viestit}">
+                <b><span th:text="${viesti.lahettaja}">Viestin lähettäjä</span></b>
                 <span th:text="${viesti.sisalto}">Viestin sisältö</span>
+                <i><span th:text="${viesti.lahetetty}">Lähetetty</span></i>
             </li>
         </ol>
         
