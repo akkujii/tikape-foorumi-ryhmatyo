@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Viesti;
@@ -38,7 +39,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         Integer viesti_id = rs.getInt("viesti_id");
         Integer ketju_id = rs.getInt("ketju_id");
         String lahettaja = rs.getString("lahettaja");
-        Date lahetetty = rs.getDate("lahetetty");
+        String lahetetty = rs.getString("lahetetty");
         String sisalto = rs.getString("sisalto");
         
 
@@ -63,7 +64,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
             Integer viesti_id = rs.getInt("viesti_id");
             Integer ketju_id = rs.getInt("ketju_id");
             String lahettaja = rs.getString("lahettaja");
-            Date lahetetty = rs.getDate("lahetetty");
+            String lahetetty = rs.getString("lahetetty");
             String sisalto = rs.getString("sisalto");
 
             viestit.add(new Viesti(viesti_id, ketju_id, lahettaja, lahetetty, sisalto));
@@ -75,6 +76,33 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         return viestit;
     }
+    
+    public List<Viesti> findByViestiketju(int id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE viestiketju_id = ?");
+        stmt.setObject(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+        List<Viesti> viesti = new ArrayList<>();
+        while (rs.next()) {
+            
+            Integer viesti_id = rs.getInt("viesti_id");
+            Integer viestiketju_id = rs.getInt("viestiketju_id");
+            String lahettaja = rs.getString("lahettaja");
+            String lahetetty = rs.getString("lahetetty");
+            String sisalto = rs.getString("sisalto");
+            
+
+            viesti.add(new Viesti(viesti_id, viestiketju_id, lahettaja, lahetetty, sisalto));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return viesti;
+    }
+
 
     @Override
     public void delete(Integer key) throws SQLException {

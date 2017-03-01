@@ -1,5 +1,6 @@
 package tikape.runko;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
@@ -50,8 +51,10 @@ public class Main {
         get("/aihealueet/:id/viestiketju/:ketju_id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
+            map.put("viesti", viestiDao.findByViestiketju(Integer.parseInt(req.params("ketju_id"))));
 
             return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
     }
+    
 }

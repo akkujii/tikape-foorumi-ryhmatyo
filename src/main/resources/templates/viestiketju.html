@@ -12,8 +12,9 @@
         <p>Tässä näkyy viestiketjun <span th:text="${viestiketju.otsikko}">viestiketju</span> viestiketjut.</p>
         
         <ol>
-            <li th:each="viesitketju: ${viestiketjut}">
-                <span th:text="${viestiketju.otsikko}">viestiketjun nimi</span> <a th:href="${'/aihealueet/:id/viestiketjut/' + viestiketju.id}">linkki</a>
+            <li th:each="viestit: ${viesti}">
+                <span th:text="${viestit.sisalto}">viestien sisalto</span> <a th:href="${'/aihealueet/' + aihealue.id + '/viestiketju/' + viestiketjut.ketjuId + '/viestit/' + viesti.viestiketjuid}">linkki</a>
+                
             </li>
         </ol>
         
