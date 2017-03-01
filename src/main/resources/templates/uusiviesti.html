@@ -2,20 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Uuden viestin luonti</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Aihealue: <span th:text="${aihealue.nimi}">aihealue</span></h1>
+        <h1>Luodaan uusi viesti aihealueelle: <span th:text="${aihealue.nimi}">aihealue</span> viestiketjuun <span th:text="${viestiketju.otsikko}"}></h1>
         
         <p>Tässä näkyy aihelueen <span th:text="${aihealue.nimi}">aihealue</span> viestiketjut.</p>
         
-        <ol>
-            <li th:each="viestiketjut: ${viestiketju}">
-                <span th:text="${viestiketjut.otsikko}">viestiketjun nimi</span> <a th:href="${'/aihealueet/' + aihealue.id + '/viestiketjut/'}">linkki</a>
-            </li>
-        </ol>
         
         <button onclick="goBack()">Takaisin</button>
 

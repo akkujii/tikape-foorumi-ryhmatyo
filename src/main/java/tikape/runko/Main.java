@@ -55,6 +55,14 @@ public class Main {
 
             return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
+        
+        get("/halt", (req, res) -> {
+            HashMap map = new HashMap<>();
+            stop();
+            System.exit(0);
+            return null;
+        }, new ThymeleafTemplateEngine());
+        
     }
     
 }
