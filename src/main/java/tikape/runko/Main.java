@@ -65,6 +65,12 @@ public class Main {
             return new ModelAndView(map, "uusiviesti");
 //              return new ModelAndView(new HashMap<>(), "uusiviesti");
         }, new ThymeleafTemplateEngine());
+               
+        post("/uusiviesti/:id/:ketju_id", (req, res) -> {
+            System.out.println("Lähettäjä: " + req.queryParams("lahettaja"));
+            System.out.println("Viesti: " + req.queryParams("sisalto"));
+            return "Uusi viesti lisätty onnistuneesti!";
+        });
         
         get("/halt", (req, res) -> {
             HashMap map = new HashMap<>();
