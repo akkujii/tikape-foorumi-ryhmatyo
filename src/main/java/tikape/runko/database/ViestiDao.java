@@ -78,6 +78,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     }
     
     public List<Viesti> findByViestiketju(int id) throws SQLException {
+        System.out.println("[findByViestiketju] kutsuttu");
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE viestiketju_id = ?");
         stmt.setObject(1, id);
@@ -99,7 +100,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         rs.close();
         stmt.close();
         connection.close();
-
+        System.out.println("[findByViestiketju] Viestejä löytyi" + viesti.size());
         return viesti;
     }
 

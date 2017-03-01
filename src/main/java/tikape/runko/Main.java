@@ -49,10 +49,10 @@ public class Main {
         }, new ThymeleafTemplateEngine());
         
         get("/aihealueet/:id/viestiketju/:ketju_id", (req, res) -> {
+            System.out.println("[Main.java] Kysellään viestejä viestiketjuun: "+ req.params("ketju_id"));
             HashMap map = new HashMap<>();
             map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
-            map.put("viesti", viestiDao.findByViestiketju(Integer.parseInt(req.params("ketju_id"))));
-
+            map.put("viestit", viestiDao.findByViestiketju(Integer.parseInt(req.params("ketju_id"))));
             return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
         
