@@ -56,6 +56,16 @@ public class Main {
             return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
         
+        
+        get("/uusiviesti/:id/:ketju_id", (req, res) -> {
+            System.out.println("[Main.java] pyydetty uusiviesti");
+            HashMap map = new HashMap<>();
+            map.put("aihealue", aihealueDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
+            return new ModelAndView(map, "uusiviesti");
+//              return new ModelAndView(new HashMap<>(), "uusiviesti");
+        }, new ThymeleafTemplateEngine());
+        
         get("/halt", (req, res) -> {
             HashMap map = new HashMap<>();
             stop();
