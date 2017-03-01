@@ -70,12 +70,17 @@ public class Main {
             System.out.println("Viesti: " + req.queryParams("sisalto"));
             
             //TODO:
-            //Muodosta parametrien pohjalta viesti tietokantaan
-            //Palauta käyttäjä viestiketjuun.
+            // 1. Muodosta parametrien pohjalta viesti tietokantaan
+            // 2. Palauta käyttäjä viestiketjuun.
             
             
             return "Jeejee";
         });
+        
+        //TODO:
+        // 1. Toteuta yllä olevan mukainen get("uusiviestiketju/:id), jossa luodaan uusi viesti ja viestiketju aihealueelle.
+        // 2. Toteuta yllä olevan mukainen post("uusiviestiketju/:id), jossa haetaan käyttäjältä viestiketjun nimi ja viesti
+        // 3. Toteuta yllä olevan mukainen aihealueen luonti, joka luo uuden aihealueen, viestiketjun ja viestin.
         
         get("/halt", (req, res) -> {
             HashMap map = new HashMap<>();
