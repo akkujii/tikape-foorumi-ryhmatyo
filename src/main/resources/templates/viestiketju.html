@@ -12,17 +12,14 @@
         <p>Tässä näkyy viestiketjun <span th:text="${viestiketju.otsikko}">viestiketju</span> viestiketjut.</p>
         
         <ol>
-<!--            <li th:each="viesti: ${viestit}">
-                <span th:text="${viesti.sisalto}">viestien sisalto</span> 
-                <a th:href="${'/aihealueet/' + aihealue.id + '/viestiketju/' + viestiketju.ketjuId + '/viestit/' + viesti.viestiketju_id}">linkki</a>
-                
-            </li>-->
             <li th:each="viesti: ${viestit}">
                 <b><span th:text="${viesti.lahettaja}">Viestin lähettäjä</span></b>
                 <span th:text="${viesti.sisalto}">Viestin sisältö</span>
                 <i><span th:text="${viesti.lahetetty}">Lähetetty</span></i>
             </li>
         </ol>
+        
+        <a th:href="${'/uusiviesti/' + viestiketju.aiheId + '/' +    viestiketju.ketjuId}">Kirjoita tähän viestiketjuun</a>
         
         <button onclick="goBack()">Takaisin</button>
 

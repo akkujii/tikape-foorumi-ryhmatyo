@@ -63,13 +63,18 @@ public class Main {
             map.put("aihealue", aihealueDao.findOne(Integer.parseInt(req.params("id"))));
             map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
             return new ModelAndView(map, "uusiviesti");
-//              return new ModelAndView(new HashMap<>(), "uusiviesti");
         }, new ThymeleafTemplateEngine());
                
         post("/uusiviesti/:id/:ketju_id", (req, res) -> {
             System.out.println("Lähettäjä: " + req.queryParams("lahettaja"));
             System.out.println("Viesti: " + req.queryParams("sisalto"));
-            return "Uusi viesti lisätty onnistuneesti!";
+            
+            //TODO:
+            //Muodosta parametrien pohjalta viesti tietokantaan
+            //Palauta käyttäjä viestiketjuun.
+            
+            
+            return "Jeejee";
         });
         
         get("/halt", (req, res) -> {
