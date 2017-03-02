@@ -13,11 +13,9 @@
         
         <ol>
             <li th:each="viestiketjut: ${viestiketju}">
-<<<<<<< HEAD
-                <span th:text="${viestiketjut.otsikko}">viestiketjun nimi</span> <a th:href="${'/aihealueet/' + aihealue.id + '/' + viestiketju.id}">linkki</a>
-=======
+
                 <span th:text="${viestiketjut.otsikko}">viestiketjun nimi</span> <a th:href="${'/aihealueet/' + aihealue.id + '/viestiketju/' + viestiketjut.ketjuId}">linkki</a>
->>>>>>> 2133e88015e7d40f8cf789f7959987e9b2590a8e
+
             </li>
         </ol>
         

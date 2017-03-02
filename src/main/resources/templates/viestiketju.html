@@ -9,7 +9,7 @@
     <body>
         <h1>Viestiketju: <span th:text="${viestiketju.otsikko}">viestiketju</span></h1>
         
-        <p>Tässä näkyy viestiketjun <span th:text="${viestiketju.otsikko}">viestiketju</span> viestiketjut.</p>
+        <p>Tässä näkyy viestiketjun <span th:text="${viestiketju.otsikko}">viestiketju</span> viestit.</p>
         
         <ol>
             <li th:each="viesti: ${viestit}">

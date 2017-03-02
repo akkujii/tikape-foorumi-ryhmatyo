@@ -70,12 +70,13 @@ public class Main {
             System.out.println("Viesti: " + req.queryParams("sisalto"));
             viestiDao.createNew(Integer.parseInt(req.params("ketju_id")), req.queryParams("lahettaja"), req.queryParams("sisalto"));
             //TODO:
-            // 1. Muodosta parametrien pohjalta viesti tietokantaan
+            
             // 2. Palauta käyttäjä viestiketjuun.
-            
-            
-            return "Jeejee";
-        });
+            HashMap map = new HashMap<>();
+            map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
+            map.put("viestit", viestiDao.findByViestiketju(Integer.parseInt(req.params("ketju_id"))));
+            return new ModelAndView(map, "viestiketju");
+        }, new ThymeleafTemplateEngine());
         
         //TODO:
         // 1. Toteuta yllä olevan mukainen get("uusiviestiketju/:id), jossa luodaan uusi viesti ja viestiketju aihealueelle.
