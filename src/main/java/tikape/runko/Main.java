@@ -68,7 +68,7 @@ public class Main {
         post("/uusiviesti/:id/:ketju_id", (req, res) -> {
             System.out.println("Lähettäjä: " + req.queryParams("lahettaja"));
             System.out.println("Viesti: " + req.queryParams("sisalto"));
-            
+            viestiDao.createNew(Integer.parseInt(req.params("ketju_id")), req.queryParams("lahettaja"), req.queryParams("sisalto"));
             //TODO:
             // 1. Muodosta parametrien pohjalta viesti tietokantaan
             // 2. Palauta käyttäjä viestiketjuun.

@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +35,12 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         if (!hasOne) {
             return null;
         }
-
         
         Integer viesti_id = rs.getInt("viesti_id");
         Integer ketju_id = rs.getInt("ketju_id");
         String lahettaja = rs.getString("lahettaja");
         String lahetetty = rs.getString("lahetetty");
         String sisalto = rs.getString("sisalto");
-        
 
         Viesti o = new Viesti(viesti_id, ketju_id, lahettaja, lahetetty, sisalto);
 
@@ -51,7 +50,21 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         return o;
     }
+    
+    public int createNew(Integer ketju_id, String lahettaja, String sisalto) throws SQLException {
+        Connection connection = database.getConnection();
+        Statement stmt = connection.createStatement();
+        int changes = stmt.executeUpdate("INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('" + lahettaja + "'," +  ketju_id + ",'" + sisalto + "');");
+        
+        stmt.close();
+        connection.close();
+        
+        System.out.println("[ViestiDao] palautettiin " + changes);
+        return changes;
+    }
 
+    
+    
     @Override
     public List<Viesti> findAll() throws SQLException {
 
