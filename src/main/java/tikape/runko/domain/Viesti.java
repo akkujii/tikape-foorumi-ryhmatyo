@@ -1,15 +1,16 @@
 package tikape.runko.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Viesti {
     private Integer viesti_id;
     private Integer viestiketju_id;
     private String lahettaja;
-    private Date lahetetty;
+    private String lahetetty;
     private String sisalto;
 
-    public Viesti(Integer viesti_id, Integer viestiketju_id, String lahettaja, Date lahetetty, String sisalto) {
+    public Viesti(Integer viesti_id, Integer viestiketju_id, String lahettaja, String lahetetty, String sisalto) {
         this.viesti_id = viesti_id;
         this.viestiketju_id = viestiketju_id;
         this.lahettaja = lahettaja;
@@ -41,11 +42,11 @@ public class Viesti {
         this.lahettaja = lahettaja;
     }
 
-    public Date getLahetetty() {
+    public String getLahetetty() {
         return lahetetty;
     }
 
-    public void setLahetetty(Date lahetetty) {
+    public void setLahetetty(String lahetetty) {
         this.lahetetty = lahetetty;
     }
 

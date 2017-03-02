@@ -1,5 +1,6 @@
 package tikape.runko;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
@@ -47,11 +48,47 @@ public class Main {
             return new ModelAndView(map, "aihealue");
         }, new ThymeleafTemplateEngine());
         
-        get("/aihealueet/:id/:ketju_id/", (req, res) -> {
+        get("/aihealueet/:id/viestiketju/:ketju_id", (req, res) -> {
+            System.out.println("[Main.java] Kysellään viestejä viestiketjuun: "+ req.params("ketju_id"));
             HashMap map = new HashMap<>();
-            map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("nro"))));
-
+            map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
+            map.put("viestit", viestiDao.findByViestiketju(Integer.parseInt(req.params("ketju_id"))));
             return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
+        
+        
+        get("/uusiviesti/:id/:ketju_id", (req, res) -> {
+            System.out.println("[Main.java] pyydetty uusiviesti");
+            HashMap map = new HashMap<>();
+            map.put("aihealue", aihealueDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("viestiketju", viestiketjuDao.findOne(Integer.parseInt(req.params("ketju_id"))));
+            return new ModelAndView(map, "uusiviesti");
+        }, new ThymeleafTemplateEngine());
+               
+        post("/uusiviesti/:id/:ketju_id", (req, res) -> {
+            System.out.println("Lähettäjä: " + req.queryParams("lahettaja"));
+            System.out.println("Viesti: " + req.queryParams("sisalto"));
+            viestiDao.createNew(Integer.parseInt(req.params("ketju_id")), req.queryParams("lahettaja"), req.queryParams("sisalto"));
+            //TODO:
+            // 1. Muodosta parametrien pohjalta viesti tietokantaan
+            // 2. Palauta käyttäjä viestiketjuun.
+            
+            
+            return "Jeejee";
+        });
+        
+        //TODO:
+        // 1. Toteuta yllä olevan mukainen get("uusiviestiketju/:id), jossa luodaan uusi viesti ja viestiketju aihealueelle.
+        // 2. Toteuta yllä olevan mukainen post("uusiviestiketju/:id), jossa haetaan käyttäjältä viestiketjun nimi ja viesti
+        // 3. Toteuta yllä olevan mukainen aihealueen luonti, joka luo uuden aihealueen, viestiketjun ja viestin.
+        
+        get("/halt", (req, res) -> {
+            HashMap map = new HashMap<>();
+            stop();
+            System.exit(0);
+            return null;
+        }, new ThymeleafTemplateEngine());
+        
     }
+    
 }
