@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Aihealue;
@@ -65,6 +66,18 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
         connection.close();
 
         return aihealueet;
+    }
+    
+    public int createNew(String otsikko) throws SQLException {
+        Connection connection = database.getConnection();
+        Statement stmt = connection.createStatement();
+        int changes = stmt.executeUpdate("INSERT INTO Aihealue (nimi) VALUES ('" +  otsikko + "');");
+        
+        stmt.close();
+        connection.close();
+        
+        System.out.println("[AihealueDao] palautettiin " + changes);
+        return changes;
     }
 
     @Override

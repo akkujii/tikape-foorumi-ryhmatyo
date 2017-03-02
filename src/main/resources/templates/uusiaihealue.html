@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Uuden aihealueen luonti</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Luodaan uusi aihealue, viestiketju ja viesti.</h1>
+        
+        
+        <form method="POST">
+            <p>Aihealue: <input type="text" name="aihealue"/></p>
+            <p>Otsikko: <input type="text" name="otsikko"/></p>
+            <p>Lähettäjä: <input type="text" name="lahettaja"/></p> 
+            <p>Viesti: <input type="text" name="sisalto"/></p>
+            <p><input type="submit" value="Lähetä"/></p>
+        </form>
+        
+        <button onclick="goBack()">Takaisin</button>
+
+        <script>
+        function goBack() {
+            window.history.back();
+        }
+        </script>
+    </body>
+</html>

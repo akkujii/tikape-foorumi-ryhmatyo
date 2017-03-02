@@ -10,6 +10,7 @@ import tikape.runko.database.AihealueDao;
 import tikape.runko.database.ViestiketjuDao;
 import tikape.runko.database.ViestiDao;
 import tikape.runko.domain.Viestiketju;
+import tikape.runko.domain.Aihealue;
 import java.util.List;
 
 public class Main {
@@ -108,6 +109,44 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("viestiketju", viestiketjuDao.findOne(suurin));
             map.put("viestit", viestiDao.findByViestiketju(suurin));
+            return new ModelAndView(map, "viestiketju");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/uusiaihealue", (req, res) -> {
+            System.out.println("[Main.java] pyydetty uusiaihealue");
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "uusiaihealue");
+        }, new ThymeleafTemplateEngine());
+        
+        post("/uusiaihealue", (req, res) -> {
+            System.out.println("Aihealue: " + req.queryParams("aihealue"));
+            System.out.println("Otsikko: " + req.queryParams("otsikko"));
+            System.out.println("Lahettaja: " + req.queryParams("lahettaja"));
+            System.out.println("Viesti: " + req.queryParams("sisalto"));
+            aihealueDao.createNew(req.queryParams("aihealue"));
+            List<Aihealue> apuAlue = aihealueDao.findAll();
+            int suurinAihealue = 0;
+            for (Aihealue alue: apuAlue) {
+                if (alue.getId() > suurinAihealue) {
+                    suurinAihealue = alue.getId();
+                }
+            }
+            
+            viestiketjuDao.createNew(suurinAihealue, req.queryParams("otsikko"));
+            List<Viestiketju> apuKetju = viestiketjuDao.findAll();
+            int suurinKetju = 0;
+            for (Viestiketju ketju: apuKetju) {
+                if (ketju.getAiheId() == suurinAihealue) {
+                    if (ketju.getKetjuId() > suurinKetju) {
+                        suurinKetju = ketju.getKetjuId();
+                    }
+                }
+            }
+            viestiDao.createNew(suurinKetju, req.queryParams("lahettaja"), req.queryParams("sisalto"));
+            System.out.println("[Main.java] pyydetty uusiviesti");
+            HashMap map = new HashMap<>();
+            map.put("viestiketju", viestiketjuDao.findOne(suurinKetju));
+            map.put("viestit", viestiDao.findByViestiketju(suurinKetju));
             return new ModelAndView(map, "viestiketju");
         }, new ThymeleafTemplateEngine());
         
