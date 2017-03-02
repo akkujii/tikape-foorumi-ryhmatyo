@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Viestiketju;
@@ -89,6 +90,18 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         connection.close();
 
         return viestiketjut;
+    }
+    
+    public int createNew(Integer aihe_id, String otsikko) throws SQLException {
+        Connection connection = database.getConnection();
+        Statement stmt = connection.createStatement();
+        int changes = stmt.executeUpdate("INSERT INTO Viestiketju (aihe_id, otsikko) VALUES (" + aihe_id + ", '" +  otsikko + "');");
+        
+        stmt.close();
+        connection.close();
+        
+        System.out.println("[ViestiketjuDao] palautettiin " + changes);
+        return changes;
     }
 
     @Override
