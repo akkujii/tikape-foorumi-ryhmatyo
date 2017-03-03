@@ -64,7 +64,23 @@ public class Database {
         lista.add("CREATE TABLE Viesti (viesti_id integer PRIMARY KEY, lahettaja varchar(20), lahetetty timestamp NOT NULL DEFAULT(datetime('now', '+2 hour')), viestiketju_id integer, sisalto varchar(32768), FOREIGN KEY(viestiketju_id) REFERENCES Viestiketju(ketju_id));"
                 + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Matti', 1, 'Niin on');"
                 + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Pekka', 1, 'Eipäs ole');"
-                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Pertti', 2, 'JOOO');");
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Jugi', 1, 'Näin voisi sanoa');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Masa', 2, 'Ois siistiä!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Peksi', 2, 'Kuha ois hyvä meno!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Jugi', 2, 'Upee idis!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Pertti', 2, 'JOOO');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Juno', 3, 'Näin voisi sanoa');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('MassiMC', 3, 'Ei kyl salee!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Pikku P', 3, 'Meikä ois sit sun Romeo!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Juntelligens', 3, 'Tollasist seteist tulee kyl rajahdysvaara!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Jugi', 4, 'Näin voisi sanoa');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Make', 4, 'Naminamia!!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Pera', 4, 'Kuha diggais!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Julle', 4, 'Upee idis!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Janne', 5, 'Kyla autot on hienoi');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Martti', 5, 'BrumBrum!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Pena', 5, 'BumtsiBum!');"
+                + "INSERT INTO Viesti (lahettaja, viestiketju_id, sisalto) VALUES ('Jugge', 5, 'Badumtssss!');");
         return lista;
     }
 }
