@@ -72,7 +72,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
     
     public List<Viestiketju> findByAihealue(int id) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE aihe_id = ? ORDER BY Viestiketju.ketju_id DESC");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE aihe_id = ? ORDER BY Viestiketju.ketju_id DESC LIMIT 10");
         stmt.setObject(1, id);
 
         ResultSet rs = stmt.executeQuery();
